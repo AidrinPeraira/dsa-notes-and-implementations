@@ -68,46 +68,48 @@
 //More optimised queue using objects (since shift has O(n) complexity)
 //Queue using object
 
-// class Queue {
+class Queue {
 
-//   constructor (){
-//     this.items = {}
+  constructor (){
+    this.items = {}
 
-//     //we keep trak of front and back since its an ibject.
-//     //we mimic array index
-//     this.tail = 0
-//     this.head = 0
-//   }
+    //we keep track of front and back since it's an object.
+    //we mimic array index
+    this.tail = 0
+    this.head = 0
+  }
 
-//   enqueue (element){
-//     this.items[this.tail] = element
-//     this.tail++
-//   }
+  enqueue (element){
+    this.items[this.tail] = element
+    this.tail++
+  }
 
-//   dequeue (){
-//     let item = this.items[this.head]
-//     delete this.items[this.head]
-//     this.head++
-//     return item
-//   }
+  dequeue (){
+    let item = this.items[this.head]
+    delete this.items[this.head]
+    this.head++
+    return item
+  }
 
-//   isEmpty(){
-//     return this.head = this.tail
-//   }
+  isEmpty(){
+    return this.head === this.tail
+  }
 
-//   peek (){
-//     return this.items[this.head]
-//   }
+  peek (){
+    return this.items[this.head]
+  }
 
-//   size (){
-//     return this.tail - this.head
-//   }
+  size (){
+    return this.tail - this.head
+  }
 
-//   print (){
-//     console.log(this.items)
-//   }
+  print (){
+    console.log(this.items)
+  }
 
-// }
+}
+
+
 
 // const queue = new Queue()
 
@@ -366,3 +368,6 @@
 
 // queue.enqueue(60);
 // queue.print();
+
+
+module.exports = Queue

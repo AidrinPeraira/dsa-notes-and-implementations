@@ -21,47 +21,47 @@
  *      - Call stack in JS runtime
  */
 
-// class Stack {
-//   constructor() {
-//     this.items = [];
-//     this.count = 0;
-//   }
+class Stack {
+  constructor() {
+    this.items = [];
+    this.count = 0;
+  }
 
-//   //add elements
-//   push(element) {
-//     this.items[this.count] = element;
-//     this.count++;
-//   }
+  //add elements
+  push(element) {
+    this.items[this.count] = element;
+    this.count++;
+  }
 
-//   //remove elements
-//   pop() {
-//     if (stack.count == 0) return null;
+  //remove elements
+  pop() {
+    if (stack.count == 0) return null;
 
-//     let removed = this.items.pop();
-//     this.count--;
-//     return removed;
-//   }
+    let removed = this.items.pop();
+    this.count--;
+    return removed;
+  }
 
-//   print() {
-//     console.log(this.items.toString());
-//   }
+  print() {
+    console.log(this.items.toString());
+  }
 
-//   isEmpty() {
-//     return this.count == 0;
-//   }
+  isEmpty() {
+    return this.count == 0;
+  }
 
-//   size () {
-//     return this.count
-//   }
+  size () {
+    return this.count
+  }
 
-//   peek () {
-//     return this.items[this.count - 1]
-//   }
+  peek () {
+    return this.items[this.count - 1]
+  }
 
-//   clear (){
-//     this.stack = []
-//   }
-// }
+  clear (){
+    this.stack = []
+  }
+}
 
 // const stack = new Stack();
 
@@ -203,3 +203,5 @@ stack.print()
 console.log(stack.pop())
 
 stack.print()
+
+module.exports = Stack

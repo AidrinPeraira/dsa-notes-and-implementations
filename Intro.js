@@ -119,6 +119,27 @@ Linked List
     - Common Operations
         - Inertion, Deletion, Search 
 
+
+Hash Table
+    - aka hash map 
+    - used to store key value pairs (this is how Map and Objects are implemented)
+    - can give fast lookup
+
+    - we store the key value pairs in a array
+    - we hash the key into a number 
+    - then we store at that index
+    - this is done in reverse to get the data
+
+    - Main operations
+        - set
+        - get
+        - remove
+
+    - Applicatinos
+        - anywhere we need O(1) insertion and lookup
+        - Databse indexing
+        - caches
+
  */
 
 /**
