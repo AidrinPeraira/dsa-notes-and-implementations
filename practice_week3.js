@@ -333,7 +333,7 @@ class MinHeap {
     let removed = this.heap[0];
     this.heap[0] = this.heap.pop();
     this.heapifyDown();
-    return removed
+    return removed;
   }
 
   getLeftChildIndex(index) {
@@ -392,173 +392,172 @@ class MinHeap {
     console.log(this.heap);
   }
 
-  removeValue(value){
-    let index = this.heap.indexOf(value)
+  removeValue(value) {
+    let index = this.heap.indexOf(value);
 
-    if(index === -1){
-      console.log("Value not found")
-      return null
+    if (index === -1) {
+      console.log("Value not found");
+      return null;
     }
 
     //value is last. no need to heapify
-    if(index === this.heap.length -1){
-      return this.heap.pop()
+    if (index === this.heap.length - 1) {
+      return this.heap.pop();
     }
 
-    let removed = this.heap[index]
-    this.heap[index] = this.heap.pop()
-    this.heapifyDown(index)
-    return removed
+    let removed = this.heap[index];
+    this.heap[index] = this.heap.pop();
+    this.heapifyDown(index);
+    return removed;
   }
 }
 
-console.log("------Min Heap------")
-let minHeap = new MinHeap()
+console.log("------Min Heap------");
+let minHeap = new MinHeap();
 
-minHeap.insert(10)
-minHeap.insert(52)
-minHeap.insert(1)
-minHeap.insert(6)
-minHeap.insert(20)
+minHeap.insert(10);
+minHeap.insert(52);
+minHeap.insert(1);
+minHeap.insert(6);
+minHeap.insert(20);
 
-minHeap.print()
-
+minHeap.print();
 
 class MaxHeap {
-  constructor(){
-    this.heap = []
+  constructor() {
+    this.heap = [];
   }
 
-  getLeftChildIndex(index){
-    return (index * 2) + 1
+  getLeftChildIndex(index) {
+    return index * 2 + 1;
   }
 
-  getRightChildIndex(index){
-    return (index * 2) + 2
+  getRightChildIndex(index) {
+    return index * 2 + 2;
   }
 
-  getParentIndex(index){
-    return Math.floor((index - 1)/2)
+  getParentIndex(index) {
+    return Math.floor((index - 1) / 2);
   }
 
-  swap(index1, index2){
-    [this.heap[index1], this.heap[index2]] = [this.heap[index2], this.heap[index1]]
+  swap(index1, index2) {
+    [this.heap[index1], this.heap[index2]] = [
+      this.heap[index2],
+      this.heap[index1],
+    ];
   }
 
-  insert(value){
-    this.heap.push(value)
-    this.heapifyUp()
+  insert(value) {
+    this.heap.push(value);
+    this.heapifyUp();
   }
 
-  remove(){
-    if(this.heap.length == 0){
-      console.log("The Heap is empty")
-      return null
+  remove() {
+    if (this.heap.length == 0) {
+      console.log("The Heap is empty");
+      return null;
     }
 
-    if(this.heap.length == 1){
-      return this.heap.shift()
+    if (this.heap.length == 1) {
+      return this.heap.shift();
     }
 
-    let removed = this.heap[0]
-    this.heap[0] = this.heap.pop()
-    this.heapifyDown(0)
-    return removed
+    let removed = this.heap[0];
+    this.heap[0] = this.heap.pop();
+    this.heapifyDown(0);
+    return removed;
   }
 
-  heapifyUp(){
-    let index = this.heap.length - 1
+  heapifyUp() {
+    let index = this.heap.length - 1;
 
-    while(index > 0){
-      if(this.heap[index] > this.heap[this.getParentIndex(index)]){
-        this.swap(index, this.getParentIndex(index))
-        index = this.getParentIndex(index)
+    while (index > 0) {
+      if (this.heap[index] > this.heap[this.getParentIndex(index)]) {
+        this.swap(index, this.getParentIndex(index));
+        index = this.getParentIndex(index);
       } else {
         break;
       }
     }
   }
 
-  heapifyDown(index){
-    let large = index
-    let left = this.getLeftChildIndex(index)
-    let right = this.getRightChildIndex(index)
+  heapifyDown(index) {
+    let large = index;
+    let left = this.getLeftChildIndex(index);
+    let right = this.getRightChildIndex(index);
 
-    if(this.heap[left] > this.heap[large] && left < this.heap.length){
-      large = left
+    if (this.heap[left] > this.heap[large] && left < this.heap.length) {
+      large = left;
     }
 
-    if(this.heap[right] > this.heap[large] && right < this.heap.length){
-      large = right
+    if (this.heap[right] > this.heap[large] && right < this.heap.length) {
+      large = right;
     }
 
-    if(large !== index){
-      this.swap(index, large)
-      this.heapifyDown(large)
+    if (large !== index) {
+      this.swap(index, large);
+      this.heapifyDown(large);
     }
   }
 
-  removeValue(value){
-    let index = this.heap.indexOf(value)
+  removeValue(value) {
+    let index = this.heap.indexOf(value);
 
-    if(index == -1){
-      console.log("Value not found")
-      return null
+    if (index == -1) {
+      console.log("Value not found");
+      return null;
     }
 
-    if(index == this.heap.length -1){
-      return this.heap.pop()
+    if (index == this.heap.length - 1) {
+      return this.heap.pop();
     }
 
-    let removed = this.heap[index]
-    this.heap[index] = this.heap.pop()
-    this.heapifyDown(index)
-    return removed
+    let removed = this.heap[index];
+    this.heap[index] = this.heap.pop();
+    this.heapifyDown(index);
+    return removed;
   }
 
-  print(){
-    console.log(this.heap)
+  print() {
+    console.log(this.heap);
   }
-  
 }
-
 
 //Heap Sort
 
 //take an array. Heapify it. you get max at first. heapy rest. keep doing untill end
 
 //max heap heapifyDown
-function heapify(arr, size, index){
-  let largest = index
-  let left = index * 2 + 1
-  let right = index * 2 + 2
+function heapify(arr, size, index) {
+  let largest = index;
+  let left = index * 2 + 1;
+  let right = index * 2 + 2;
 
-  if(left < size && arr[left] > arr[largest]){
-    largest = left
+  if (left < size && arr[left] > arr[largest]) {
+    largest = left;
   }
 
-  if(right < size && arr[right] > arr[largest]){
-    largest = right
+  if (right < size && arr[right] > arr[largest]) {
+    largest = right;
   }
 
-  if(largest !== index){
-    [arr[largest], arr[index]] = [arr[index], arr[largest]]
-    heapify(arr, size, largest)
+  if (largest !== index) {
+    [arr[largest], arr[index]] = [arr[index], arr[largest]];
+    heapify(arr, size, largest);
   }
 }
 
-function heapSort(arr){
+function heapSort(arr) {
+  let size = arr.length;
 
-  let size = arr.length
-
-  for(let i = Math.floor(size/2)-1; i >=0; i--){
-    heapify(arr, size, i)
+  for (let i = Math.floor(size / 2) - 1; i >= 0; i--) {
+    heapify(arr, size, i);
     //we heapify on sub tree at a time. starting from last
   }
 
-  for(let i = size - 1; i > 0; i--){
-    [arr[0], arr[i]] = [arr[i], arr[0]]
-    heapify(arr, i, 0)
+  for (let i = size - 1; i > 0; i--) {
+    [arr[0], arr[i]] = [arr[i], arr[0]];
+    heapify(arr, i, 0);
   }
 }
 
@@ -566,9 +565,252 @@ let arr = [1, 3, 2, 5, 6, 4, 8];
 heapSort(arr);
 console.log(arr);
 
+//Trie
 
+class TrieNode {
+  constructor() {
+    this.children = {};
+    // children will be an object of child nodes
+    this.isEndOfWOrd = false;
+  }
+}
 
+class Trie {
+  constructor() {
+    this.root = new TrieNode();
+  }
 
+  insert(word) {
+    let node = this.root;
 
+    for (let char of word) {
+      //if there is no field for char in children
+      //make a field and add a node for that char
 
+      if (!node.children[char]) {
+        node.children[char] = new TrieNode();
+      }
 
+      //take the node and make it current.
+      node = node.children[char];
+    }
+
+    //after the loop is done all letters of word will have been added
+    node.isEndOfWOrd = true;
+  }
+
+  search(word) {
+    let node = this.root;
+
+    for (let char of word) {
+      //if that letter is not found then word is not there
+      if (!node.children[char]) {
+        return false;
+      }
+
+      //check next letter
+      node = node.children[char];
+    }
+
+    return node.isEndOfWOrd; //cant return true directly
+  }
+
+  print(node = this.root, word = "") {
+    if (node.isEndOfWOrd) {
+      console.log(word);
+    }
+
+    for (let char in node.children) {
+      word = word + char;
+      this.print(node.children[char], word);
+    }
+  }
+
+  startsWith(prefix) {
+    // we search for a prefix
+    let node = this.root;
+    for (let char of prefix) {
+      if (!node.children[char]) {
+        return false;
+      }
+      node = node.children[char];
+    }
+    return true;
+  }
+
+  autocomplete(prefix) {
+    let node = this.root;
+
+    //this is like print but adds to an array
+    let result = [];
+
+    for (let char of prefix) {
+      if (!node.children[char]) {
+        console.log("No results for autocomplete");
+        return;
+      }
+      node = node.children[char];
+    }
+    //loop checks for prefix first
+    //now collect the words
+
+    this.collectWords(prefix, node, result);
+    console.log(result);
+    return result;
+  }
+
+  collectWords(prefix, node, result = []) {
+    if (node.isEndOfWOrd == true) {
+      result.push(prefix);
+    }
+
+    for (let char in node.children) {
+      this.collectWords(prefix + char, node.children[char], result);
+    }
+
+    return result;
+  }
+
+  countWords(node = this.root) {
+    let count = 0;
+
+    if (node.isEndOfWOrd) {
+      count++;
+    }
+
+    for (let char in node.children) {
+      count += this.countWords(node.children[char]);
+    }
+
+    return count;
+  }
+}
+
+console.log("-----Tries----");
+const trie1 = new Trie();
+trie1.insert("carbon");
+trie1.insert("cars");
+trie1.print();
+console.log(trie1.search("cars"));
+
+let tnode = new Trie();
+tnode.insert("car");
+tnode.insert("cat");
+tnode.insert("careness");
+
+tnode.print();
+tnode.search("care");
+
+tnode.startsWith("cat");
+
+tnode.autocomplete("ca");
+
+console.log("Total number of words are " + tnode.countWords());
+
+//Graphs
+
+/**
+ * 
+ * Directed vs Undirected
+ * Weighted vs Unweighted (cost)
+ * 
+ * Applications
+ *  Social Networks, Google Maps, Recomendation Systeem
+ 
+Two ways to make Graphs
+  - Using Adjacency Matric
+  - Using Adjacency List *
+*/
+
+class Graph {
+  constructor() {
+    this.adjacencyList = {};
+  }
+
+  addvertex(vertex) {
+    //create a vertex if it doesn't exist
+    if (!this.adjacencyList[vertex]) {
+      this.adjacencyList[vertex] = [];
+    }
+  }
+
+  addEdge(v1, v2) {
+    if (!this.adjacencyList[v1]) {
+      this.addvertex(v1);
+    }
+
+    if (!this.adjacencyList[v2]) {
+      this.addvertex(v2);
+    }
+
+    this.adjacencyList[v1].push(v2);
+    this.adjacencyList[v2].push(v1); // having this line makes graph undirected
+  }
+
+  dfs(start) {
+    const stack = new Stack();
+    stack.push(start);
+
+    const visited = {};
+
+    while (!stack.isEmpty()) {
+      const vertex = stack.pop();
+
+      if (!visited[vertex]) {
+        visited[vertex] = true;
+        console.log(vertex); //here we do some processing as required
+
+        //add neighbours to stack
+        for (let neighbour of this.adjacencyList[vertex]) {
+          if (!visited[neighbour]) {
+            stack.push(neighbour);
+          }
+        }
+      }
+    }
+  }
+
+  bfs(start) {
+    const queue = new Queue();
+    queue.enqueue(start);
+
+    let visited = {};
+
+    while (!queue.isEmpty()) {
+      let vertex = queue.dequeue();
+
+      if (!visited[vertex]) {
+        visited[vertex] = true;
+        console.log(vertex);
+
+        for(let neighbour of this.adjacencyList[vertex]){
+          if(!visited[vertex]){
+            queue.enqueue(vertex)
+          }
+        }
+      }
+    }
+  }
+
+  printGraph(){
+    for(let vertex in this.adjacencyList){
+      console.log(vertex + ' -> ' + this.adjacencyList[vertex].join(", "))
+    }
+  }
+}
+
+console.log("----Graph-----")
+const graph = new Graph()
+
+graph.addEdge("A", "B")
+graph.addEdge("A", "C")
+graph.addEdge("B", "D")
+
+console.log("dfs: ")
+graph.dfs("A")
+
+console.log("bfs: ")
+graph.bfs("A")
+
+console.log("Graph: ")
+graph.printGraph()
