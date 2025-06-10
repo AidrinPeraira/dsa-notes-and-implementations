@@ -83,9 +83,6 @@
  enqueue the node's right child
  */
 
-
-
-
 //Common actions
 /**
 
@@ -103,8 +100,7 @@
 
  */
 
-
- const Queue = require("./Queue.js");
+const Queue = require("./Queue.js");
 const Stack = require("./Stack.js");
 
 //Binary Tree
@@ -352,75 +348,191 @@ function dfsPreOrder(node) {
   }
 }
 
-
-dfsPreOrder(bst.root)
-
-
+dfsPreOrder(bst.root);
 
 //BST Problems
 
 //find range sum of bst
 //sum of all values within given range (inclusive)
 
-function rangeSumBst(root = this.root, low, high){
-  if(root === null) {
-    return 0
+function rangeSumBst(root = this.root, low, high) {
+  if (root === null) {
+    return 0;
   }
 
-  let sum = 0
+  let sum = 0;
 
-  if(root.value >= low && root.value<=high){
-    sum += root.value 
-    sum += rangeSumBst(root.left, low, high)
-    sum += rangeSumBst(root.right, low, high)
-  } else if (root.value > high){
-    sum += rangeSumBst(root.left, low, high)
-  } else if (root.value < low){
-    sum += rangeSumBst(root.right, low, high)
+  if (root.value >= low && root.value <= high) {
+    sum += root.value;
+    sum += rangeSumBst(root.left, low, high);
+    sum += rangeSumBst(root.right, low, high);
+  } else if (root.value > high) {
+    sum += rangeSumBst(root.left, low, high);
+  } else if (root.value < low) {
+    sum += rangeSumBst(root.right, low, high);
   }
 
-  return sum
+  return sum;
 }
 
-console.log(rangeSumBst(bst.root, 1, 10))
+console.log(rangeSumBst(bst.root, 1, 10));
 
 //find closest value in bst
 
-function findClosestInBst(root, target, closest = root.value){
-  
-  if(root == null) return closest
+function findClosestInBst(root, target, closest = root.value) {
+  if (root == null) return closest;
 
-  if(Math.abs(target - root.value) < Math.abs(target - closest)){
-    closest = root.value
+  if (Math.abs(target - root.value) < Math.abs(target - closest)) {
+    closest = root.value;
   }
 
-  if(target < root.value){
+  if (target < root.value) {
     //target is closer to left than right. therefore chance of differnce becoming smaller is to left
-    return findClosestInBst(root.left, target, closest)
-  } else if (target > root.value){
-    return findClosestInBst(root.right, target, closest)
+    return findClosestInBst(root.left, target, closest);
+  } else if (target > root.value) {
+    return findClosestInBst(root.right, target, closest);
   } else {
     //target euqals value
-    return root.value
+    return root.value;
   }
-  
 }
 
-console.log(findClosestInBst(bst.root, 6))
-
+console.log(findClosestInBst(bst.root, 6));
 
 //check is tree1 is subset of tree2
+
+
+
 //check if 2 trees are identical
+function checkIfSimilar(rootOne, rootTwo){
+  if(rootOne == null && rootTwo == null) return true
+  if(rootOne == null || rootTwo == null) return false
+  if(rootOne.value !== rootTwo.value) return false
+  return checkIfSimilar(rootOne.left, rootTwo.left) && checkIfSimilar(rootOne.right, rootTwo.right)
+}
+
+
 //validate if a tree is bst
+function checkIfBst(node, min = -Infinity, max = Infinity){
+  if(node == null) return true
+
+  if(node.value < min || node.value > max){
+    return false
+  }
+
+  return checkIfBst(node.right, node.value, max) && checkIfBst(node.left, min, node.value)
+}
+
+
+
+//find numebr of nodes in left sub tree
+function countLeftNodes (root){
+  return countNodes(root.left)
+}
+
+//find number of nodes in tree
+function countNodes(root){
+  if(root == null) return 0
+
+  return 1 + countNodes(root.left) + countNodes(root.right)
+}
+
+
 //find minimum value in bst
+function min(root) {
+  if(root == null) return null
+
+  if (root.left == null) return root.value;
+
+  return min(root.left);
+}
+
 //find kth smallest element in bst
 //find kth largest element in bst
+function kth_largest(root, k) {
+  if (root == null) return;
+
+  let result = [];
+
+  function inorder(root) {
+    if (root) {
+      inorder(root.left);
+      result.push(root.value);
+      inorder(root.right);
+    }
+  }
+
+  inorder(root);
+
+  return result[result.length - k]; //kth largest
+
+  return result[k - 1]; //kth smallest
+}
+
 //count leaf nodes in bst
+function countLeafNodes(root) {
+  if ((root = null)) return 0;
+
+  if (root.right == null && root.left == null) {
+    return 1;
+  }
+
+  return countLeafNodes(root.left) + countLeafNodes(root.right);
+}
+
+function countLeafNodes_bfs(root) {
+  if (root == null) return 0;
+
+  let stack = [root];
+
+  let count = 0;
+
+  while (stack.length > 0) {
+    let current = stack.pop();
+
+    if (current.left == null && current.right == null) {
+      count++;
+    }
+
+    if (current.left) {
+      stack.push(current.left);
+    }
+
+    if (current.right) {
+      stack.push(current.right);
+    }
+  }
+
+  return count;
+}
+
+function countLeafNodes_dfs(root) {
+  if (root == null) return 0;
+
+  let queue = new Queue();
+  queue.enqueue(root);
+  let count = 0;
+
+  while (!queue.isEmpty()) {
+    let current = queue.dequeue();
+
+    if (current.left == null && current.right == null) {
+      count++;
+    }
+
+    if (current.left) queue.enqueue(current.left);
+    if (current.right) queue.enqueue(current.right);
+  }
+
+  return count;
+}
+
 //find height of tree
+function findHeightBST(root) {
+  if (root == null) return -1;
 
+  let LH = findHeightBST(root.left);
+  let RH = findHeightBST(root.right);
 
-
-
-
-
-
+  return Math.max(LH, RH) + 1;
+}

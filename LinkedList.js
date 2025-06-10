@@ -29,7 +29,7 @@ class Node {
 
  */
 
-    class LinkedList {
+class LinkedList {
   constructor() {
     this.head = null; // the list will be initialised as empty
     this.size = 0;
@@ -153,37 +153,36 @@ class Node {
     }
   }
 
-  search (value) {
-    if(this.size == 0) return -1
+  search(value) {
+    if (this.size == 0) return -1;
 
-    let index = 0
-    let curr = this.head
-    while(curr){
-        if(curr.value == value){
-            return index
-        }
-        curr = curr.next
-        index++ 
+    let index = 0;
+    let curr = this.head;
+    while (curr) {
+      if (curr.value == value) {
+        return index;
+      }
+      curr = curr.next;
+      index++;
     }
 
-    return -1
+    return -1;
   }
 
-  reverse () {
-    let prev = null
-    let curr = this.head
+  reverse() {
+    let prev = null;
+    let curr = this.head;
 
-    while(curr){
-        let next = curr.next
-        curr.next = prev
-        prev = curr
-        curr = next
+    while (curr) {
+      let next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
     }
 
-    this.head = prev
+    this.head = prev;
   }
 }
-
 
 //checking
 const list = new LinkedList();
@@ -216,5 +215,5 @@ list.print();
 console.log(list.search(10));
 list.print();
 
-list.reverse()
-list.print()
+list.reverse();
+list.print();

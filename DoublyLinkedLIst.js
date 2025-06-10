@@ -13,6 +13,11 @@ class DoublyLinkedList {
     this.size = 0;
   }
 
+  constructor(){
+    this.head = null
+    this.size = 0
+  }
+
   isEmpty() {
     return this.size == 0;
   }
@@ -95,6 +100,7 @@ class DoublyLinkedList {
     prev.next = node;
     this.size++;
   }
+
 
   removeFrom(index) {
     if (index < 0 || index > this.size - 1) {

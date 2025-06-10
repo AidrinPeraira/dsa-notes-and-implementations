@@ -1,4 +1,7 @@
 
+const Stack = require('./Stack.js')
+const Queue = require('./Queue.js')
+
 //Graphs
 
 /**
